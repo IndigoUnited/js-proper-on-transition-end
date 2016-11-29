@@ -1,0 +1,39 @@
+{
+  "name": "proper-on-transition-end",
+  "version": "0.1.0",
+  "description": "Cross-browser transitionend event listener",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint '{*.js,test/**/*.js}' --ignore-pattern=test/coverage",
+    "test": "mocha --bail",
+    "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail && echo Coverage lies in test/coverage/lcov-report/index.html",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- --bail && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "bugs": {
+    "url": "https://github.com/IndigoUnited/js-proper-on-transition-end/issues/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/IndigoUnited/js-proper-on-transition-end.git"
+  },
+  "keywords": [
+    "end",
+    "transtionend",
+    "ontransitionend",
+    "transition",
+    "event",
+    "listener"
+  ],
+  "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@satazor/eslint-config": "^3.0.0",
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.6",
+    "eslint": "^3.0.0",
+    "istanbul": "^0.4.1",
+    "mocha": "^3.0.2"
+  }
+}
