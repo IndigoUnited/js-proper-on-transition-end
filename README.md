@@ -20,13 +20,10 @@ This module is based on [on-transition-end](https://github.com/jshanson7/on-tran
 
 ```js
 import onTransitionEnd from 'proper-on-transition-end';
-// or
-const onTransitionEnd = window.onTransitionEnd;
 
 const element = document.getElementById('transitioning-element');
-const expectedDuration = 1000;
 
-onTransitionEnd(element, expectedDuration, () => console.log('done'));
+onTransitionEnd(element, 1000, () => console.log('done'));
 ```
 
 
@@ -34,6 +31,16 @@ onTransitionEnd(element, expectedDuration, () => console.log('done'));
 
 `$ npm install proper-on-transition-end`
 
+
+## Usage
+
+```js
+onTransitionEnd(element, duration, callback)
+```
+
+- `element`: The element that is transitioning.
+- `duration`: The expected duration of the transition, in milliseconds. Note that there is an implicit grace period of `100` milliseconds before the event times out. If you'd like to tweak this, instead of providing a `Number`, you can provide an object as follows `{ duration: 1000, gracePeriod: 200 }`.
+- `callback`: The callback that is called when the transition ends.
 
 ## Tests
 
