@@ -47,13 +47,13 @@ module.exports = function (element, expectedDuration, callback) {
         gracePeriod = defaultEventFailureGracePeriod;
     }
 
-    element.addEventListener(transitionend, __handleTransitionEnd);
+    element.addEventListener(transitionend, __handleTransitionEnd.bind(null, false));
 
-    timeOutTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
+    timeOutTimer = setTimeout(__handleTransitionEnd.bind(null, true), expectedDuration + gracePeriod);
 
-    function __handleTransitionEnd(e) {
-        // if event is on target
-        if (e.target === element) {
+    function __handleTransitionEnd(timedOut, e) {
+        // if event timed out or it it is on target
+        if (timedOut || e.target === element) {
             // clear the timer if it's still running
             clearTimeout(timeOutTimer);
 
