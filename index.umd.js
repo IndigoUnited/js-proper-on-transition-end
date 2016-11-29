@@ -27,38 +27,38 @@ var transitionend = (function () {
     return false;
 })();
 
-module.exports = function (element, expectedDuration, callback, eventFailureGracePeriod) {
+module.exports = function (element, expectedDuration, callback) {
     var gracePeriod;
-    var done;
-    var forceEnd;
+    var timeOutTimer;
 
     // browser does not support transitionend, no animation
     if (!transitionend) {
-        setTimeout(function () {
+        setTimeout(function __handleSetTimeout() {
             callback();
         }, 0);
 
         return;
     }
 
-    gracePeriod = eventFailureGracePeriod !== undefined ? eventFailureGracePeriod : defaultEventFailureGracePeriod;
-    done = false;
-    forceEnd = false;
+    // define the duration and grace period
+    if (typeof expectedDuration === 'object') {
+        gracePeriod = expectedDuration.gracePeriod;
+        expectedDuration = expectedDuration.duration;
+    } else {
+        gracePeriod = defaultEventFailureGracePeriod;
+    }
 
-    element.addEventListener(transitionend, onTransitionEnd);
+    element.addEventListener(transitionend, __handleTransitionEnd);
 
-    setTimeout(function () {
-        if (!done) {
-            // forcing onTransitionEnd callback...
-            forceEnd = true;
-            onTransitionEnd();
-        }
-    }, expectedDuration + gracePeriod);
+    timeOutTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
 
-    function onTransitionEnd(e) {
-        if (forceEnd || e.target === element) {
-            done = true;
-            element.removeEventListener(transitionend, onTransitionEnd);
+    function __handleTransitionEnd(e) {
+        // if event is on target
+        if (e.target === element) {
+            // clear the timer if it's still running
+            clearTimeout(timeOutTimer);
+
+            element.removeEventListener(transitionend, __handleTransitionEnd);
 
             if (callback) {
                 callback(e);

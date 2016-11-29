@@ -28,7 +28,7 @@ var transitionend = (function () {
 
 module.exports = function (element, expectedDuration, callback) {
     var gracePeriod;
-    var abortTimer;
+    var timeOutTimer;
 
     // browser does not support transitionend, no animation
     if (!transitionend) {
@@ -49,13 +49,13 @@ module.exports = function (element, expectedDuration, callback) {
 
     element.addEventListener(transitionend, __handleTransitionEnd);
 
-    abortTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
+    timeOutTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
 
     function __handleTransitionEnd(e) {
         // if event is on target
         if (e.target === element) {
             // clear the timer if it's still running
-            clearTimeout(abortTimer);
+            clearTimeout(timeOutTimer);
 
             element.removeEventListener(transitionend, __handleTransitionEnd);
 
