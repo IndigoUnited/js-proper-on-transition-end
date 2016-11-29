@@ -20,6 +20,8 @@ This module is based on [on-transition-end](https://github.com/jshanson7/on-tran
 
 ```js
 import onTransitionEnd from 'proper-on-transition-end';
+// or
+const onTransitionEnd = window.onTransitionEnd;
 
 const element = document.getElementById('transitioning-element');
 

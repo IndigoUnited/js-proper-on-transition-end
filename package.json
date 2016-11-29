@@ -7,7 +7,8 @@
     "lint": "eslint '{*.js,test/**/*.js}' --ignore-pattern=test/coverage",
     "test": "mocha --bail",
     "test-cov": "istanbul cover --dir test/coverage _mocha -- --bail && echo Coverage lies in test/coverage/lcov-report/index.html",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- --bail && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test-travis": "istanbul cover _mocha --report lcovonly -- --bail && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "browserify": "browserify -s on-transition-end index.js > index.umd.js"
   },
   "bugs": {
     "url": "https://github.com/IndigoUnited/js-proper-on-transition-end/issues/"
@@ -26,10 +27,10 @@
   ],
   "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@satazor/eslint-config": "^3.0.0",
+    "browserify": "^13.1.1",
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",
     "eslint": "^3.0.0",
