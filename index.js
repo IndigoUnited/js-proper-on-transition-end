@@ -15,10 +15,8 @@ var transitionend = (function () {
 
     // look for supported transition
     for (transition in transitions) {
-        if (transitions.hasOwnProperty(transition)) {
-            if (element.style[transition] !== undefined) {
-                return transitions[transition];
-            }
+        if (element.style[transition] !== undefined) {
+            return transitions[transition];
         }
     }
 
@@ -32,9 +30,7 @@ module.exports = function (element, expectedDuration, callback) {
 
     // browser does not support transitionend, no animation
     if (!transitionend) {
-        setTimeout(function __handleSetTimeout() {
-            callback();
-        }, 0);
+        setTimeout(callback, 0);
 
         return;
     }
@@ -47,20 +43,20 @@ module.exports = function (element, expectedDuration, callback) {
         gracePeriod = defaultEventFailureGracePeriod;
     }
 
-    element.addEventListener(transitionend, __handleTransitionEnd.bind(null, false));
+    element.addEventListener(transitionend, __handleTransitionEnd);
 
-    timeOutTimer = setTimeout(__handleTransitionEnd.bind(null, true), expectedDuration + gracePeriod);
+    timeOutTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
 
-    function __handleTransitionEnd(timedOut, e) {
+    function __handleTransitionEnd(e) {
         // if event timed out or it it is on target
-        if (timedOut || e.target === element) {
+        if (!e || e.target === element) {
             // clear the timer if it's still running
             clearTimeout(timeOutTimer);
 
             element.removeEventListener(transitionend, __handleTransitionEnd);
 
             if (callback) {
-                callback(e);
+                callback();
             }
         }
     }
