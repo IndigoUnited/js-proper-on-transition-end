@@ -58,7 +58,6 @@ module.exports = function (element, options, callback) {
     timeoutTimer = setTimeout(__handleTransitionEnd, timeout + gracePeriod);
 
     function __handleTransitionEnd(e) {
-        console.log(e);
         // if event timed out or it is on target (respecting the longest transitioning property if necessary)
         if (!e || (e.target === element && (!longest || longest.property === e.propertyName))) {
             // clear the timer if it's still running
