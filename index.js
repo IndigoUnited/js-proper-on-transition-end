@@ -1,5 +1,7 @@
 'use strict';
 
+var longestTransition = require('longest-transition');
+
 var defaultEventFailureGracePeriod = 100;
 
 // transitionend below based on https://github.com/kubens/transition-utility
@@ -24,9 +26,11 @@ var transitionend = (function () {
     return false;
 })();
 
-module.exports = function (element, expectedDuration, callback) {
+module.exports = function (element, options, callback) {
+    var timeout;
     var gracePeriod;
-    var timeOutTimer;
+    var timeoutTimer;
+    var longest;
 
     // browser does not support transitionend, no animation
     if (!transitionend) {
@@ -35,23 +39,30 @@ module.exports = function (element, expectedDuration, callback) {
         return;
     }
 
-    // define the duration and grace period
-    if (typeof expectedDuration === 'object') {
-        gracePeriod = expectedDuration.gracePeriod;
-        expectedDuration = expectedDuration.duration;
-    } else {
-        gracePeriod = defaultEventFailureGracePeriod;
+    // handle default parameters
+    if (typeof options === 'function') {
+        callback = options;
+        options = {};
     }
+
+    // if no timeout provided, infer it
+    if (!options.timeout) {
+        longest = longestTransition(element);
+    }
+
+    timeout = options.timeout || (longest.duration + longest.delay);
+    gracePeriod = options.gracePeriod || defaultEventFailureGracePeriod;
 
     element.addEventListener(transitionend, __handleTransitionEnd);
 
-    timeOutTimer = setTimeout(__handleTransitionEnd, expectedDuration + gracePeriod);
+    timeoutTimer = setTimeout(__handleTransitionEnd, timeout + gracePeriod);
 
     function __handleTransitionEnd(e) {
-        // if event timed out or it it is on target
-        if (!e || e.target === element) {
+        console.log(e);
+        // if event timed out or it is on target (respecting the longest transitioning property if necessary)
+        if (!e || (e.target === element && (!longest || longest.property === e.propertyName))) {
             // clear the timer if it's still running
-            clearTimeout(timeOutTimer);
+            clearTimeout(timeoutTimer);
 
             element.removeEventListener(transitionend, __handleTransitionEnd);
 

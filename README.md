@@ -16,7 +16,7 @@
 
 Cross-browser `transitionend` event listener.
 
-This module is based on [on-transition-end](https://github.com/jshanson7/on-transition-end), which no longer seems to be maintained and is not working properly.
+This module is based on [on-transition-end](https://github.com/jshanson7/on-transition-end), which no longer seems to be maintained and is not working properly. Also, it automatically infers the timeout based on the transition duration.
 
 ```js
 import onTransitionEnd from 'proper-on-transition-end';
@@ -25,30 +25,29 @@ const onTransitionEnd = window.onTransitionEnd;
 
 const element = document.getElementById('transitioning-element');
 
-onTransitionEnd(element, 1000, () => console.log('done'));
+onTransitionEnd(element, () => console.log('done'));
 ```
-
 
 ## Installation
 
 `$ npm install proper-on-transition-end`
 
-
 ## Usage
 
 ```js
-onTransitionEnd(element, duration, callback)
+onTransitionEnd(element, [options,] callback)
 ```
 
 - `element`: The element that is transitioning.
-- `duration`: The expected duration of the transition, in milliseconds. Note that there is an implicit grace period of `100` milliseconds before the event times out. If you'd like to tweak this, instead of providing a `Number`, you can provide an object as follows `{ duration: 1000, gracePeriod: 200 }`.
+- `options`: You can pass a few options here:
+    - `timeout`: This is automatically calculated for you, based on the longest transition of the element, using [`longest-transition`](https://github.com/IndigoUnited/js-longest-transition). Still, you can override that and pass the `timeout` in milliseconds.
+    - `gracePeriod`: There is an implicit grace period of `100` milliseconds before the event times out, but you can tweak it using this option.
 - `callback`: The callback that is called when the transition ends.
 
 ## Tests
 
 `$ npm test`   
 `$ npm test-cov` to get coverage report
-
 
 ## License
 

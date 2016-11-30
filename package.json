@@ -1,6 +1,6 @@
 {
   "name": "proper-on-transition-end",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Cross-browser transitionend event listener",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,9 @@
   ],
   "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "longest-transition": "^0.1.0"
+  },
   "devDependencies": {
     "@satazor/eslint-config": "^3.0.0",
     "browserify": "^13.1.1",
