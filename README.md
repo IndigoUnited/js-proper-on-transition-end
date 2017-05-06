@@ -11,7 +11,7 @@
 [coveralls-image]:https://img.shields.io/coveralls/IndigoUnited/js-proper-on-transition-end/master.svg
 [david-dm-url]:https://david-dm.org/IndigoUnited/js-proper-on-transition-end
 [david-dm-image]:https://img.shields.io/david/IndigoUnited/js-proper-on-transition-end.svg
-[david-dm-dev-url]:https://david-dm.org/IndigoUnited/js-proper-on-transition-end#info=devDependencies
+[david-dm-dev-url]:https://david-dm.org/IndigoUnited/js-proper-on-transition-end?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/IndigoUnited/js-proper-on-transition-end.svg
 
 Cross-browser `transitionend` event listener.
