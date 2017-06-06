@@ -1,6 +1,6 @@
 # proper-on-transition-end
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url] [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 [npm-url]:https://npmjs.org/package/proper-on-transition-end
 [downloads-image]:http://img.shields.io/npm/dm/proper-on-transition-end.svg
@@ -13,6 +13,8 @@
 [david-dm-image]:https://img.shields.io/david/IndigoUnited/js-proper-on-transition-end.svg
 [david-dm-dev-url]:https://david-dm.org/IndigoUnited/js-proper-on-transition-end?type=dev
 [david-dm-dev-image]:https://img.shields.io/david/dev/IndigoUnited/js-proper-on-transition-end.svg
+[greenkeeper-image]:https://badges.greenkeeper.io/IndigoUnited/js-proper-on-transition-end.svg
+[greenkeeper-url]:https://greenkeeper.io/
 
 Cross-browser `transitionend` event listener.
 
