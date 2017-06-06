@@ -2,4 +2,5 @@ language: node_js
 node_js:
   - "4"
   - "6"
-script: "npm run test-travis"
+# Uncomment line below when we got proper tests
+#script: "npm run test-travis"
