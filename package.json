@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@satazor/eslint-config": "^3.0.0",
-    "browserify": "^14.0.0",
+    "browserify": "^15.0.0",
     "chai": "^4.0.0",
     "coveralls": "^2.11.6",
     "eslint": "^3.0.0",
