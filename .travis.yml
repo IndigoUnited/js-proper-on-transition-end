@@ -3,4 +3,5 @@ node_js:
   - "4"
   - "6"
 # Uncomment line below when we got proper tests
+  - "10"
 #script: "npm run test-travis"
