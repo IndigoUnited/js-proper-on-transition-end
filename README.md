@@ -20,24 +20,19 @@ Cross-browser `transitionend` event listener.
 
 This module is based on [on-transition-end](https://github.com/jshanson7/on-transition-end), which no longer seems to be maintained and is not working properly. Also, it automatically infers the timeout based on the transition duration.
 
+## Installation
+
+`$ npm install proper-on-transition-end`
+
+
+## Usage
+
 ```js
 import onTransitionEnd from 'proper-on-transition-end';
 // or
 const onTransitionEnd = window.onTransitionEnd;
 
-const element = document.getElementById('transitioning-element');
-
-onTransitionEnd(element, () => console.log('done'));
-```
-
-## Installation
-
-`$ npm install proper-on-transition-end`
-
-## Usage
-
-```js
-onTransitionEnd(element, [options,] callback)
+const cancelOnTransitionEnd = onTransitionEnd(element, [options,] callback)
 ```
 
 - `element`: The element that is transitioning.
@@ -46,10 +41,15 @@ onTransitionEnd(element, [options,] callback)
     - `gracePeriod`: There is an implicit grace period of `100` milliseconds before the event times out, but you can tweak it using this option.
 - `callback`: The callback that is called when the transition ends.
 
+
+Calling `cancelOnTransitionEnd` will remove the listener and cleanup the timers.
+
+
 ## Tests
 
 `$ npm test`   
 `$ npm test-cov` to get coverage report
+
 
 ## License
 

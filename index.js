@@ -36,7 +36,7 @@ module.exports = function (element, options, callback) {
     if (!transitionend) {
         setTimeout(callback, 0);
 
-        return;
+        return function () {};
     }
 
     // handle default parameters
@@ -48,6 +48,12 @@ module.exports = function (element, options, callback) {
     // if no timeout provided, infer it
     if (!options.timeout) {
         longest = longestTransition(element);
+
+        if (!longest) {
+            setTimeout(callback, 0);
+
+            return function () {};
+        }
     }
 
     timeout = options.timeout || (longest.duration + longest.delay);
@@ -60,14 +66,18 @@ module.exports = function (element, options, callback) {
     function __handleTransitionEnd(e) {
         // if event timed out or it is on target (respecting the longest transitioning property if necessary)
         if (!e || (e.target === element && (!longest || longest.property === e.propertyName))) {
-            // clear the timer if it's still running
-            clearTimeout(timeoutTimer);
-
-            element.removeEventListener(transitionend, __handleTransitionEnd);
+            __cleanup();
 
             if (callback) {
                 callback();
             }
         }
     }
+
+    function __cleanup() {
+        clearTimeout(timeoutTimer);
+        element.removeEventListener(transitionend, __handleTransitionEnd);
+    }
+
+    return __cleanup;
 };
