@@ -1,6 +1,6 @@
 {
   "name": "proper-on-transition-end",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Cross-browser transitionend event listener",
   "main": "index.js",
   "scripts": {
