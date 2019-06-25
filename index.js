@@ -7,8 +7,15 @@ var defaultEventFailureGracePeriod = 100;
 // transitionend below based on https://github.com/kubens/transition-utility
 var transitionend = (function () {
     var transition;
-    var element = document.createElement('fakeelement');
-    var transitions = {
+    var element;
+    var transitions;
+
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    element = document.createElement('fakeelement');
+    transitions = {
         transition: 'transitionend',
         OTransition: 'oTransitionEnd',
         MozTransition: 'transitionend',
