@@ -34,7 +34,7 @@
     "@satazor/eslint-config": "^3.0.0",
     "browserify": "^14.0.0",
     "chai": "^4.0.0",
-    "coveralls": "^2.11.6",
+    "coveralls": "^3.0.0",
     "eslint": "^3.0.0",
     "istanbul": "^0.4.1",
     "mocha": "^3.0.2"
